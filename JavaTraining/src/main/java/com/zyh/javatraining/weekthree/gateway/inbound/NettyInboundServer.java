@@ -18,8 +18,8 @@ public class NettyInboundServer {
     private static int port = 8808;
 
     private static List<String> proxyServers = new ArrayList<>(){{
-        add("http://localhost:8801");
-        add("http://localhost:8802");
+        add("localhost:8801");
+//        add("localhost:8802");
     }};
 
     public static void main(String[] args) {

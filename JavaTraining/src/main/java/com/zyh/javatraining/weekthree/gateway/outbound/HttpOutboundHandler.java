@@ -53,7 +53,7 @@ public class HttpOutboundHandler {
         int cores = Runtime.getRuntime().availableProcessors();
         long keepAliveTime = 1000;
         int queueSize = 2048;
-        RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();//.DiscardPolicy();
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
         proxyService = new ThreadPoolExecutor(cores, cores,
                 keepAliveTime, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(queueSize),
                 new NamedThreadFactory("proxyService"), handler);
@@ -117,15 +117,7 @@ public class HttpOutboundHandler {
     private void handleResponse(final FullHttpRequest fullRequest, final ChannelHandlerContext ctx, final HttpResponse endpointResponse) throws Exception {
         FullHttpResponse response = null;
         try {
-//            String value = "hello,kimmking";
-//            response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(value.getBytes("UTF-8")));
-//            response.headers().set("Content-Type", "application/json");
-//            response.headers().setInt("Content-Length", response.content().readableBytes());
-
-
             byte[] body = EntityUtils.toByteArray(endpointResponse.getEntity());
-//            System.out.println(new String(body));
-//            System.out.println(body.length);
 
             response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(body));
 
@@ -133,35 +125,20 @@ public class HttpOutboundHandler {
             response.headers().setInt("Content-Length", Integer.parseInt(endpointResponse.getFirstHeader("Content-Length").getValue()));
 
             httpResponseFilter.filter(response);
-
-//            for (Header e : endpointResponse.getAllHeaders()) {
-//                //response.headers().set(e.getName(),e.getValue());
-//                System.out.println(e.getName() + " => " + e.getValue());
-//            }
-
         } catch (Exception e) {
             e.printStackTrace();
             response = new DefaultFullHttpResponse(HTTP_1_1, NO_CONTENT);
-            exceptionCaught(ctx, e);
+            e.printStackTrace();
+            ctx.close();
         } finally {
             if (fullRequest != null) {
                 if (!HttpUtil.isKeepAlive(fullRequest)) {
                     ctx.write(response).addListener(ChannelFutureListener.CLOSE);
                 } else {
-                    //response.headers().set(CONNECTION, KEEP_ALIVE);
                     ctx.write(response);
                 }
             }
             ctx.flush();
-            //ctx.close();
         }
-        
     }
-    
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
-    
-    
 }
