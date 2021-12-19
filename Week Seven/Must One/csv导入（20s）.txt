@@ -1,0 +1,1 @@
+load data infile '/order.csv' into table `order`;
