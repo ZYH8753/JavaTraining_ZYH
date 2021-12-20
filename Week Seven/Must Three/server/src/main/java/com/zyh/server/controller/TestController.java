@@ -20,7 +20,7 @@ public class TestController {
 
     @RequestMapping("/slave")
     public String slave() {
-        orderService.insertSlave(new Order(null, "2",1));
-        return "ok";
+        int size = orderService.select();
+        return String.valueOf(size);
     }
 }
