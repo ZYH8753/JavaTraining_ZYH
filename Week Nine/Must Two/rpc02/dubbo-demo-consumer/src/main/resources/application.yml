@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: dubbo-demo-consumer
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&amp;characterEncoding=utf-8
+#    username: root
+#    password: 123456
+
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: none
+dubbo:
+  scan:
+    base-packages: io.kimmking.dubbo.demo.consumer
+  registry:
+    address: zookeeper://localhost:2181
+  metadata-report:
+    address: zookeeper://localhost:2181
