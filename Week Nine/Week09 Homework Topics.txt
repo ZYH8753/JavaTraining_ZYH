@@ -28,3 +28,7 @@
 实现一个自定义 Dubbo 的 Cluster/Loadbalance 扩展，如果一分钟内调用某个服务 / 提供者超过 10 次，则拒绝提供服务直到下一分钟 ;
 整合 Dubbo+Sentinel，实现限流功能 ;
 整合 Dubbo 与 Skywalking，实现全链路性能监控。
+
+
+
+/C:/Users/ZYH/Desktop/Java%20Advanced%20training/JavaTraining_ZYH/Week%20Nine/Must%20Two/rpc02/dubbo-demo-consumer/target/classes/hmily.yml
