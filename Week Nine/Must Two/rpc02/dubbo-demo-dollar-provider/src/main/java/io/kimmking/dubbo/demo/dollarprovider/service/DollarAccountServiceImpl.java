@@ -9,7 +9,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-@DubboService(version = "1.0.0", tag = "red", weight = 100)
+@DubboService//(version = "1.0.0", tag = "red", weight = 100)
 public class DollarAccountServiceImpl implements DollarAccountService {
     @Autowired
     DollarAccountMapper dollarAccountMapper;
@@ -22,24 +22,9 @@ public class DollarAccountServiceImpl implements DollarAccountService {
     public FreezeAccount freezePrice(long dollarId, int price) {
         DollarAccount dollarAccount = dollarAccountMapper.selectByUserid(dollarId);
         if (dollarAccount == null) {
-            return null;
+            throw new RuntimeException("dollar 账户不存在！");
         }
 
-        FreezeAccount freezeAccount = doFreezePrice(dollarAccount, price);
-
-        return freezeAccount;
-    }
-
-    @Override
-    @Transactional
-    public Integer addDollarPrice(FreezeAccount freezeAccount, long targetUseId) {
-        int update = dollarAccountMapper.updatePriceInt(targetUseId, freezeAccount.getDollarPrice());
-        int delete = freezeMapper.deleteById(freezeAccount.getId());
-        return update + delete;
-    }
-
-    @Transactional
-    public FreezeAccount doFreezePrice(DollarAccount dollarAccount, int price) {
         int ans = dollarAccountMapper.subPriceById(dollarAccount.getId(), price);
         if (ans != 1) {
             throw new RuntimeException("dollar 账户余额不足！");
@@ -51,5 +36,12 @@ public class DollarAccountServiceImpl implements DollarAccountService {
         return freezeAccount;
     }
 
-
+    @Override
+    @Transactional
+    public Integer addDollarPrice(FreezeAccount freezeAccount, long targetUseId) {
+        int update = dollarAccountMapper.updatePriceInt(targetUseId, freezeAccount.getDollarPrice());
+        int delete = freezeMapper.deleteById(freezeAccount.getId());
+        System.out.println("addDollarPrice :" + (update + delete));
+        return update + delete;
+    }
 }

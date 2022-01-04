@@ -9,7 +9,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-@DubboService(version = "1.0.0", tag = "red", weight = 100)
+@DubboService//(version = "1.0.0", tag = "red", weight = 100)
 public class RmbAccountServiceImpl implements RmbAccountService {
     @Autowired
     RmbAccountMapper rmbAccountMapper;
@@ -17,31 +17,13 @@ public class RmbAccountServiceImpl implements RmbAccountService {
     @Autowired
     FreezeMapper freezeMapper;
 
-    @Autowired
-    RmbAccountService rmbAccountService;
-
     @Override
     public FreezeAccount freezePrice(long rmbId, int price) {
         RmbAccount rmbAccount = rmbAccountMapper.selectByUserid(rmbId);
         if (rmbAccount == null) {
-            return null;
+            throw new RuntimeException("rmb 账户不存在！");
         }
 
-        FreezeAccount freezeAccount = doFreezePrice(rmbAccount, price);
-
-        return freezeAccount;
-    }
-
-    @Override
-    @Transactional
-    public Integer addRmbPrice(FreezeAccount freezeAccount, long targetUseId) {
-        int update = rmbAccountMapper.updatePriceInt(targetUseId, freezeAccount.getRmbPrice());
-        int delete = freezeMapper.deleteById(freezeAccount.getId());
-        return update + delete;
-    }
-
-    @Transactional
-    public FreezeAccount doFreezePrice(RmbAccount rmbAccount, int price) {
         int ans = rmbAccountMapper.subPriceById(rmbAccount.getId(), price);
         if (ans != 1) {
             throw new RuntimeException("rmb 账户余额不足！");
@@ -53,5 +35,12 @@ public class RmbAccountServiceImpl implements RmbAccountService {
         return freezeAccount;
     }
 
-
+    @Override
+    @Transactional
+    public Integer addRmbPrice(FreezeAccount freezeAccount, long targetUseId) {
+        int update = rmbAccountMapper.updatePriceInt(targetUseId, freezeAccount.getRmbPrice());
+        int delete = freezeMapper.deleteById(freezeAccount.getId());
+        System.out.println("addRmbPrice :" + (update + delete));
+        return update + delete;
+    }
 }

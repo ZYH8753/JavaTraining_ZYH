@@ -24,21 +24,30 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>2.7.8</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.dromara</groupId>
             <artifactId>hmily-spring-boot-starter-apache-dubbo</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.dromara</groupId>
+                    <artifactId>hmily-repository-mongodb</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.dromara</groupId>
+                    <artifactId>mongo-java-driver</artifactId>
+                </exclusion>
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-starter-logging</artifactId>-->
+<!--                </exclusion>-->
+            </exclusions>
             <version>2.1.1</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.dromara</groupId>-->
+<!--            <artifactId>hmily-apache-dubbo</artifactId>-->
+<!--            <version>2.1.1</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

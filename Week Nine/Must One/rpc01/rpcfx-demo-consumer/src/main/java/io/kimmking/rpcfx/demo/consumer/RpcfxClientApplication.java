@@ -72,7 +72,7 @@ public class RpcfxClientApplication {
 
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@RequestMapping("/userService")
 	public User userService(@RequestParam String id) {

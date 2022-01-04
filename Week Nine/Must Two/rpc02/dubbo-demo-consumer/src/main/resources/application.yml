@@ -5,13 +5,11 @@ spring:
   application:
     name: dubbo-demo-consumer
 #  datasource:
-#    url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&amp;characterEncoding=utf-8
-#    username: root
-#    password: 123456
+#    druid:
+#      url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&amp;characterEncoding=utf-8
+#      username: root
+#      password: 123456
 
-  main:
-    allow-bean-definition-overriding: true
-    web-application-type: none
 dubbo:
   scan:
     base-packages: io.kimmking.dubbo.demo.consumer
@@ -19,3 +17,14 @@ dubbo:
     address: zookeeper://localhost:2181
   metadata-report:
     address: zookeeper://localhost:2181
+
+#logging:
+#  level:
+#    root: error
+#    org.springframework.web: info
+#    org.apache.ibatis: debug
+#    org.dromara.hmily.tac: debug
+#    org.dromara.hmily.demo.bonuspoint: debug
+#    org.dromara.hmily.demo.lottery: debug
+#    org.dromara.hmily.demo: debug
+#  path: "./logs"
