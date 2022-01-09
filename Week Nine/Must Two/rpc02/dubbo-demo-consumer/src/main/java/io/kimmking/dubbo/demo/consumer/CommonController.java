@@ -13,7 +13,7 @@ public class CommonController {
 
     @RequestMapping(value = "transfer")
     public String transfer(@RequestBody Order order) {
-        transferService.transfer(order);
+        transferService.transferBySeataTCC(order);
         return "ok";
     }
 }

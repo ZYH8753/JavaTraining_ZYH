@@ -24,6 +24,18 @@
         </dependency>
 
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.dromara</groupId>
             <artifactId>hmily-spring-boot-starter-apache-dubbo</artifactId>
             <exclusions>
@@ -42,12 +54,6 @@
             </exclusions>
             <version>2.1.1</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.dromara</groupId>-->
-<!--            <artifactId>hmily-apache-dubbo</artifactId>-->
-<!--            <version>2.1.1</version>-->
-<!--        </dependency>-->
 
     </dependencies>
 

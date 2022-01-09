@@ -29,6 +29,4 @@
 整合 Dubbo+Sentinel，实现限流功能 ;
 整合 Dubbo 与 Skywalking，实现全链路性能监控。
 
-
-
-/C:/Users/ZYH/Desktop/Java%20Advanced%20training/JavaTraining_ZYH/Week%20Nine/Must%20Two/rpc02/dubbo-demo-consumer/target/classes/hmily.yml
+ 

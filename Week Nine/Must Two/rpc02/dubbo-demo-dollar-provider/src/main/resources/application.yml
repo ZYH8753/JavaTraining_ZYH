@@ -1,14 +1,18 @@
 server:
-  port: 8091
+  port: 8082
   
 spring:
   application:
     name: dubbo-demo-dollar-provider
   datasource:
-    druid:
-      url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&amp;characterEncoding=utf-8
-      username: root
-      password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+#    druid:
+#      url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&characterEncoding=utf-8
+#      username: root
+#      password: 123456
 
 dubbo:
   scan:

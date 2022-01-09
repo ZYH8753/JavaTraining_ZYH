@@ -4,11 +4,11 @@ server:
 spring:
   application:
     name: dubbo-demo-consumer
-#  datasource:
-#    druid:
-#      url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&amp;characterEncoding=utf-8
-#      username: root
-#      password: 123456
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/rpc02?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: 123456
 
 dubbo:
   scan:

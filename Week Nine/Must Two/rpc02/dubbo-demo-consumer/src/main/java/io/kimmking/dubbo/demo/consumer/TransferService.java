@@ -5,5 +5,9 @@ import org.dromara.hmily.annotation.Hmily;
 
 public interface TransferService {
     @Hmily
-    void transfer(Order order);
+    void transferByHmilyTCC(Order order);
+
+    void transferBySeataTCC(Order order);
+
+    void transferBySeataAT(Order order);
 }
