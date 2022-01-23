@@ -10,5 +10,7 @@ logging:
 # 作业，在这里使用spring boot配置各项内容，
 spring:
   redis:
-    host: 127.0.0.1
-    port: 6379
+    redisson:
+      file: classpath:redisson.yaml
+    cluster:
+      nodes: 127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381

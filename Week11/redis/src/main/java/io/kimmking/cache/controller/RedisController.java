@@ -1,5 +1,6 @@
 package io.kimmking.cache.controller;
 
+import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -7,6 +8,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -83,5 +85,25 @@ public class RedisController {
         redisTemplate.convertAndSend(PUBLISH_ORDER_TOPIC, "order");
         return "ok";
     }
+
+
+    @RequestMapping("redisCluster")
+    public String redisCluster() {
+//        ClusterJedis.getJedisCluster().set("a","1");
+//        ClusterJedis.getJedisCluster().set("b","2");
+        System.out.println(redisTemplate.opsForValue().get("a"));
+        return "ok";
+    }
+
+    @RequestMapping("redissonCluster")
+    public String redissonCluster(@RequestParam String a) {
+//        ClusterJedis.getJedisCluster().set("a","1");
+//        ClusterJedis.getJedisCluster().set("b","2");
+        RMap<String, String> map1 = redissonClient.getMap("map1");
+        map1.put("bbb", a);
+        return "ok";
+    }
+
+
 
 }
